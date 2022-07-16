@@ -26,7 +26,7 @@
     </van-form>
     <!-- footer -->
     <div class="toZc">
-      <a href="#">还没有账号，去注册~</a>
+      <a href="javascript:;">还没有账号，去注册~</a>
     </div>
   </div>
 </template>
