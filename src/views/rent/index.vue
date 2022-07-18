@@ -2,23 +2,23 @@
   <div>
     <!-- Header -->
     <div class="header">
-      <van-nav-bar title="收藏列表" left-arrow @click-left="onClickLeft" />
+      <van-nav-bar title="房屋管理" left-arrow @click-left="onClickLeft" />
     </div>
     <!-- main -->
-    <div class="big" v-for="obj in Favorites" :key="obj.houseCode">
+    <div class="big" v-for="(item, index) in rent" :key="index">
       <van-row class="rwo1">
         <van-col span="8"
           ><van-image
             width="106"
             height="80"
-            :src="`${baseUrl}${obj.houseImg}`"
+            :src="item.houseImg ? `${baseUrl}${item.houseImg}` : ''"
         /></van-col>
         <van-col span="16">
           <van-row class="row2">
-            <span class="span1">{{ obj.title }}</span>
-            <span class="span2">{{ obj.desc }}</span>
-            <van-tag type="success">{{ obj.tags[0] }}</van-tag>
-            <span class="span3"> {{ obj.price }} <i>元/月</i></span>
+            <span class="span1">{{ item.title }}</span>
+            <span class="span2">{{ item.desc }}</span>
+            <van-tag type="success">{{ item.tags[0] }}</van-tag>
+            <span class="span3"> {{ item.price }} <i>元/月</i></span>
           </van-row>
         </van-col>
       </van-row>
@@ -27,30 +27,31 @@
 </template>
 
 <script>
-import { getFavorites } from '@/api/user.js'
+import { getHouses } from '@/api/user.js'
 export default {
   data() {
     return {
-      Favorites: [],
-      baseUrl: ''
+      rent: [],
+      baseUrl: '',
+      houseImg: ''
     }
   },
   created() {
-    this.getFavorites()
+    this.getHouses()
   },
   components: {},
   methods: {
-    async getFavorites() {
+    async getHouses() {
       this.$toast.loading({
         message: '加载中...',
         forbidClick: true
       })
-      const res = await getFavorites()
+      const res = await getHouses()
       // console.log(res)
-      this.Favorites = res.data.body
+      this.rent = res.data.body
+      // console.log(this.rent)
       this.baseUrl = res.config.baseURL
       // console.log(this.baseUrl)
-      // console.log(this.Favorites)
     },
     onClickLeft() {
       this.$router.back()

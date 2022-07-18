@@ -6,3 +6,5 @@ export const login = (username, password) =>
 export const userInfo = () => request({ url: '/user' })
 
 export const getFavorites = () => request({ url: '/user/favorites' })
+
+export const getHouses = () => request({ url: '/user/houses' })

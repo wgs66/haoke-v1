@@ -17,7 +17,7 @@
         <div class="mask2">
           <van-grid :border="false" icon-size="22px" clickable>
             <van-grid-item icon="star-o" text="我的收藏" @click="toFavorate" />
-            <van-grid-item icon="wap-home-o" text="我的出租" />
+            <van-grid-item icon="wap-home-o" text="我的出租" @click="toRent" />
             <van-grid-item icon="clock-o" text="看房记录" />
             <van-grid-item icon="debit-pay" text="成为房主" />
             <van-grid-item text="个人资料"
@@ -56,7 +56,7 @@
         <div class="mask2">
           <van-grid :border="false" icon-size="22px" clickable>
             <van-grid-item icon="star-o" text="我的收藏" @click="toFavorate" />
-            <van-grid-item icon="wap-home-o" text="我的出租" />
+            <van-grid-item icon="wap-home-o" text="我的出租" @click="toRent" />
             <van-grid-item icon="clock-o" text="看房记录" />
             <van-grid-item icon="debit-pay" text="成为房主" />
             <van-grid-item text="个人资料"
@@ -120,6 +120,9 @@ export default {
     },
     toFavorate() {
       this.$router.push({ path: '/favorate' })
+    },
+    toRent() {
+      this.$router.push({ path: '/rent' })
     }
   },
   created() {
