@@ -2,7 +2,7 @@
   <div>
     <!--------------------------------- bg ---------------------------->
 
-    <div v-if="!this.$store.state.user.token">
+    <div v-if="isLogin">
       <div class="bg">
         <img src="@/assets/img/bg.png" alt="" />
       </div>
@@ -16,7 +16,7 @@
         </div>
         <div class="mask2">
           <van-grid :border="false" icon-size="22px" clickable>
-            <van-grid-item icon="star-o" text="我的收藏" />
+            <van-grid-item icon="star-o" text="我的收藏" @click="toFavorate" />
             <van-grid-item icon="wap-home-o" text="我的出租" />
             <van-grid-item icon="clock-o" text="看房记录" />
             <van-grid-item icon="debit-pay" text="成为房主" />
@@ -55,7 +55,7 @@
         </div>
         <div class="mask2">
           <van-grid :border="false" icon-size="22px" clickable>
-            <van-grid-item icon="star-o" text="我的收藏" />
+            <van-grid-item icon="star-o" text="我的收藏" @click="toFavorate" />
             <van-grid-item icon="wap-home-o" text="我的出租" />
             <van-grid-item icon="clock-o" text="看房记录" />
             <van-grid-item icon="debit-pay" text="成为房主" />
@@ -87,6 +87,11 @@ export default {
       usersInfo: []
     }
   },
+  computed: {
+    isLogin() {
+      return !this.$store.state.user.token
+    }
+  },
   methods: {
     toLogin() {
       this.$router.push({ path: '/login' })
@@ -99,20 +104,25 @@ export default {
         })
         .then(() => {
           removeToken()
-          this.$store.state.user.token = ''
+          this.$store.commit('SET_Token', {})
         })
         .catch(() => {})
     },
     async getUserInfo() {
-      const res = await userInfo(this.$store.state.user.token)
-      console.log(res)
-      this.baseUrl = res.config.baseURL
-      // console.log(this.baseUrl)
-      this.usersInfo = res.data.body
-      // console.log(this.usersInfo)
+      if (!this.isLogin) {
+        const res = await userInfo(this.$store.state.user.token)
+        console.log(res)
+        this.baseUrl = res.config.baseURL
+        // console.log(this.baseUrl)
+        this.usersInfo = res.data.body
+        // console.log(this.usersInfo)
+      }
+    },
+    toFavorate() {
+      this.$router.push({ path: '/favorate' })
     }
   },
-  mounted() {
+  created() {
     this.getUserInfo()
   }
 }
