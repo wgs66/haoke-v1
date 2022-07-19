@@ -26,7 +26,8 @@ const routes = [
   },
   { path: '/login', component: () => import('@/views/My/login') },
   { path: '/rent', component: () => import('@/views/rent') },
-  { path: '/favorate', component: () => import('@/views/favorate') }
+  { path: '/favorate', component: () => import('@/views/favorate') },
+  { path: '/city', component: () => import('@/views/city') }
 ]
 
 const router = new VueRouter({
