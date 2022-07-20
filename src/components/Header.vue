@@ -40,8 +40,8 @@ export default {
 /deep/.header {
   .van-nav-bar__content {
     background-color: #21b97a;
-    position: fixed;
     width: 100%;
+    position: fixed;
     .van-nav-bar__left {
       color: #fff;
       .van-icon {
